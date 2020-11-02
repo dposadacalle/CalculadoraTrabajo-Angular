@@ -1,0 +1,26 @@
+<div class="card bg-light mb-3">
+    <div class="card-header">Tecnicos</div>
+    <div class="card-body">
+        <h5 class="card-title">Listado de Tecnicos</h5>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">ID del Tecnico</th>
+                    <th scope="col">ID del Servicio</th>
+                    <th scope="col">Fecha Inicio</th>
+                    <th scope="col">Fecha Fin</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let tecnico of tecnicos">
+                    <td>{{tecnico.id}}</td>
+                    <td>{{tecnico.identTecnico}}</td>
+                    <td>{{tecnico.identServicio}}</td>
+                    <td>{{tecnico.fechaInicio}}</td>
+                    <td>{{tecnico.fechaFin}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
