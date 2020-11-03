@@ -2,29 +2,20 @@ import { Component, OnInit } from '@angular/core';
 import { Tecnico } from './tecnico';
 import { TecnicoService } from './tecnico.service';
 import {Router, ActivatedRoute} from '@angular/router';
-import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-form',
-  templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  selector: 'app-detalle',
+  templateUrl: './detalle.component.html',
+  styleUrls: ['./detalle.component.css']
 })
-export class FormComponent implements OnInit {
+export class DetalleComponent implements OnInit {
   
   public tecnico: Tecnico = new Tecnico();
-  public title: string = 'Reporte de Servicio';
+  public title: string = 'Detalle Servicio';
 
   constructor(private tecnicoService: TecnicoService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
-  }
-
-  create(): void {
-    this.tecnicoService.create(this.tecnico)
-      .subscribe(cliente => {
-        this.router.navigate(['/tecnicos'])
-        Swal.fire('Nuevo Servicio', `Técnico ${this.tecnico.identServicio} creado con éxito!`, 'success')
-      });
   }
 
   verDetalle(): void{
@@ -35,4 +26,6 @@ export class FormComponent implements OnInit {
       }
     });
   }
+
+
 }

@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { Observable, of} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
-import {map} from 'rxjs/operators';
+import { Observable, of, throwError} from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {map, catchError} from 'rxjs/operators';
+import Swal from 'sweetalert2';
+import {Router} from '@angular/router';
 
 import {Tecnico} from './tecnico';
-import {TECNICOS} from './tecnicos.json';
 
 @Injectable({
   providedIn: 'root'
@@ -12,23 +13,31 @@ import {TECNICOS} from './tecnicos.json';
 export class TecnicoService {
   
   private urlEndPoint: string = 'http://localhost:8080/api/tecnicos';
+  
+ private httpHeaders = new HttpHeaders({'Content-Type': 'application/json'});
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private router: Router) { }
   
-  // Convertimos/creamos  que el flujo Observable a partir de los objetos TECNICOS
-  // Observable: Se basa en el patron de diseño Observador, 
-  // Donde se tiene un subjecto Observable, para este caso es Cliente, 
-  // y tambien unos posibles observadores, estan atento a escuchar cualquier cambio en el Subjecto (Tecnico)
-  
-  // se tiene el cliente (Angular ) y un Backend (Spring Boot), 
-  // Cuando cambia su contenido en el servidor backend, 
-  // este automaticamente cambia y notifica en el cliente en tiempo real.
-  // Sin la necesidad de recargar el Browser, se hara forma transparente
-  // Solo cuando cambie el estado (informacion ) de los Tecnicos
   getTecnicos(): Observable<Tecnico[]>{
-    // return of(TECNICOS);
-    
-    // primer forma
-    return this.http.get<Tecnico[]>(this.urlEndPoint);
+    return this.http.get(this.urlEndPoint).pipe(
+      map(response => response as Tecnico[])
+    );
   }
+
+  create(tecnico: Tecnico): Observable<Tecnico>{
+    return this.http.post<Tecnico>(this.urlEndPoint, tecnico, {headers: this.httpHeaders});
+  }
+
+  getTecnico(id): Observable<Tecnico>{
+    return this.http.get<Tecnico>(`${this.urlEndPoint}/${id}`).pipe(
+      catchError(err => {
+        this.router.navigate(['/tecnicos']);
+        console.error(err.error.mensaje);
+        Swal.fire('Error al ver Detalle', err.error.mensaje, 'error');
+        return throwError(err);
+      })
+    );
+  }
+
 }
+

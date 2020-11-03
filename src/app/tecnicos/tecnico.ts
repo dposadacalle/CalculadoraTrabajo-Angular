@@ -4,4 +4,6 @@ export class Tecnico {
     identServicio: string;
     fechaInicio: string;
     fechaFin: string;
+    horaIncio: string;
+    horaFin: string;
 }

@@ -1,18 +1,47 @@
 <div class="card border-secondary mb-3">
-    <div class="card-header">{{titulo}}</div>
+    <div class="card-header">{{title}}</div>
     <div class="card-body text-secondary">
-        <h5 class="card-title">Registrar Servicio</h5>
+        <h5 class="card-title"></h5>
         <form (ngSubmit)="create()">
-            <div class="form-group">
-                <label for="indentTecnico">Identificacion del Técnico: </label>
+            <div class="form-group row">
+                <label for="identTecnico" class="col-form-label col-sm-4">ID del Técnico: </label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" id="indentTecnico" name="txtIdentTecnico" placeholder="Ingrese ID del Técnico" [(ngModel)]="tecnico.identTecnico">
+                    <input type="text" class="form-control" [(ngModel)]="tecnico.identTecnico" name="identTecnico">
                 </div>
             </div>
+
             <div class="form-group row">
-                <label for="identTecnico" class="col-form-label col-sm-s2">ID del Técnico: </label>
+                <label for="identServicio" class="col-form-label col-sm-4">ID del Servicio: </label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" [(ngModel)]="tecnico.identTecnico" name="txtIdentTecnico">
+                    <input type="text" class="form-control" [(ngModel)]="tecnico.identServicio" name="identServicio">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="fechaIncio" class="col-form-label col-sm-4">Fecha Inicio: </label>
+                <div class="col-sm-6">
+                    <input type="date" class="form-control" [(ngModel)]="tecnico.fechaInicio" id="fechaIncio" name="fechaIncio">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="FechaFin" class="col-form-label col-sm-4">Fecha Fin: </label>
+                <div class="col-sm-6">
+                    <input type="date" class="form-control" [(ngModel)]="tecnico.fechaFin" id="fechaFin" name="FechaFin">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="HoraInicio" class="col-form-label col-sm-4">Hora Inicio: </label>
+                <div class="col-sm-6">
+                    <input type="time" class="form-control" [(ngModel)]="tecnico.horaIncio" id="horaInicio" name="HoraInicio">
+                </div>
+            </div>
+
+            <div class="form-group row">
+                <label for="horaFin" class="col-form-label col-sm-4">Hora Fin: </label>
+                <div class="col-sm-6">
+                    <input type="time" class="form-control" [(ngModel)]="tecnico.horaFin" name="horaFin" id="horaFin">
                 </div>
             </div>
 
@@ -21,7 +50,12 @@
                     <button class="btn btn-success">Guardar</button>
                 </div>
             </div>
-
         </form>
     </div>
 </div>
+
+<script>
+    $('#fechaIncio').datepicker({
+        dateFormat: 'yy-mm-dd'
+    });
+</script>

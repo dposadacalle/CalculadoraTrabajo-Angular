@@ -10,10 +10,15 @@ import { RouterModule, Routes} from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormComponent } from './tecnicos/form.component';
 import { FormsModule } from '@angular/forms';
+import { HomeComponent } from './home/home.component';
+import { DetalleComponent } from './tecnicos/detalle.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/tecnicos', pathMatch: 'full'},
-  {path: 'tecnicos', component: TecnicosComponent}
+  {path: 'home', component: HomeComponent},
+  {path: 'tecnicos', component: TecnicosComponent},
+  {path: 'tecnicos/form', component: FormComponent},
+  {path: 'tecnicos/detalle/:id', component: DetalleComponent}
 ];
 
 @NgModule({
@@ -22,7 +27,9 @@ const routes: Routes = [
     HeaderComponent,
     FooterComponent,
     TecnicosComponent,
-    FormComponent
+    FormComponent,
+    HomeComponent,
+    DetalleComponent
   ],
   imports: [
     BrowserModule,
