@@ -2,52 +2,82 @@
     <div class="card-header">{{title}}</div>
     <div class="card-body text-secondary">
         <h5 class="card-title"></h5>
-        <form (ngSubmit)="create()">
+        <form #ServicioForm="ngForm">
             <div class="form-group row">
                 <label for="identTecnico" class="col-form-label col-sm-4">ID del Técnico: </label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" [(ngModel)]="tecnico.identTecnico" name="identTecnico">
+                    <input type="text" class="form-control" [(ngModel)]="tecnico.identTecnico" name="identTecnico" required minlength="10" #identTecnico="ngModel">
+                    <div class="alert alert-danger" *ngIf="identTecnico.invalid && (identTecnico.dirty || identTecnico.touched)">
+                        <div *ngIf="identTecnico.errors.required">
+                            La Identificación del Técnico es Requerida
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="identServicio" class="col-form-label col-sm-4">ID del Servicio: </label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" [(ngModel)]="tecnico.identServicio" name="identServicio">
+                    <input type="text" class="form-control" [(ngModel)]="tecnico.identServicio" name="identServicio" required minlength="10" #identServicio="ngModel">
+                    <div class="alert alert-danger" *ngIf="identServicio.invalid && (identServicio.dirty || identServicio.touched)">
+                        <div *ngIf="identServicio.errors.required">
+                            La Identificación del Servicio es Requerida
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="fechaIncio" class="col-form-label col-sm-4">Fecha Inicio: </label>
                 <div class="col-sm-6">
-                    <input type="date" class="form-control" [(ngModel)]="tecnico.fechaInicio" id="fechaIncio" name="fechaIncio">
+                    <input type="date" class="form-control" [(ngModel)]="tecnico.fechaInicio" id="fechaIncio" name="fechaIncio" required #fechaIncio="ngModel">
+                    <div class="alert alert-danger" *ngIf="fechaIncio.invalid && identServicio.dirty">
+                        <div *ngIf="fechaIncio.errors.required">
+                            La Fecha Inicio es Requerida
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="FechaFin" class="col-form-label col-sm-4">Fecha Fin: </label>
                 <div class="col-sm-6">
-                    <input type="date" class="form-control" [(ngModel)]="tecnico.fechaFin" id="fechaFin" name="FechaFin">
+                    <input type="date" class="form-control" [(ngModel)]="tecnico.fechaFin" id="fechaFin" name="FechaFin" required #fechaFin="ngModel">
+                    <div class="alert alert-danger" *ngIf="fechaFin.invalid && fechaFin.dirty">
+                        <div *ngIf="fechaFin.errors.required">
+                            La Fecha de Fin es Requeida
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="HoraInicio" class="col-form-label col-sm-4">Hora Inicio: </label>
                 <div class="col-sm-6">
-                    <input type="time" class="form-control" [(ngModel)]="tecnico.horaIncio" id="horaInicio" name="HoraInicio">
+                    <input type="time" class="form-control" [(ngModel)]="tecnico.horaIncio" id="horaInicio" name="HoraInicio" required #horaInicio="ngModel">
+                    <div class="alert alert-danger" *ngIf="horaFin.invalid && horaInicio.dirty">
+                        <div *ngIf="horaInicio.errors.required">
+                            La Hora de Fin es Requerida
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="form-group row">
                 <label for="horaFin" class="col-form-label col-sm-4">Hora Fin: </label>
                 <div class="col-sm-6">
-                    <input type="time" class="form-control" [(ngModel)]="tecnico.horaFin" name="horaFin" id="horaFin">
+                    <input type="time" class="form-control" [(ngModel)]="tecnico.horaFin" name="horaFin" id="horaFin" required #horaFin="ngModel">
+                    <div class="alert alert-danger" *ngIf="fechaIncio.invalid && (horaFin.dirty || horaFin.touched)">
+                        <div *ngIf="horaFin.errors.required">
+                            La Hora de Fin es Requerida
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <div class="form-group row">
                 <div class="col-sm-6">
-                    <button class="btn btn-success">Guardar</button>
+                    <button class="btn btn-success" (click)='create()' [disabled]="!ServicioForm.form.valid">Guardar</button>
                 </div>
             </div>
         </form>
